@@ -1,7 +1,27 @@
 <!doctype html>
 <meta charset=utf-8>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Plume{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plume.css') }}">
 
-<h1>Plume</h1>
+<div class=container>
+	<!-- HEADER -->
+	<div class="header clearfix">
+		<nav>
+			<ul class="nav nav-pills float-right">
+				<li class=nav-item>
+					<a class="nav-link" href=#>User</a>
+			</ul>
+		</nav>
+		<h3 class=text-muted>Plume</h3>
+	</div>
 
-{% block main %}{% endblock %}
+	<div class="row content">{% block main %}{% endblock %}</div>
+
+	<!-- FOOTER -->
+	<footer class=footer>
+		<p>Jellycopter 2017</p>
+	</footer>
+</div>
+
