@@ -1,20 +1,12 @@
+{% set active = {"page": "active"} %}
 {% extends "base.html" %}
 
 {% block main %}
-	<!-- SIDEBAR -->
-	<div class="list-group col-md-3">
-		<a class="list-group-item active" href="{{ url_for('page') }}">Pages</a>
-		<a class="list-group-item" href="{{ url_for('home') }}">Articles</a>
-		<a class="list-group-item" href="{{ url_for('home') }}">Settings</a>
-	</div>
-
-	<!-- MAIN -->
-	<main class="col-md-9">
-		<div class="row my-2 mr-0">
-			<h3 class="col-md-10 mb-0">Pages</h3>
-			<a class="btn btn-success col-md-2" href="#">Create</a>
+		<div class="row mt-2">
+			<h3 class="col-10 pl-0">Pages</h3>
+			<a class="btn btn-success col-2 mb-2" href="#">Create</a>
 		</div>
-		<ul class="list-group border-0">
+		<ul class="list-group row">
 			<li class="list-group-item">
 				Exemple &ndash; Today
 				<div class="col text-right px-0">
@@ -27,6 +19,5 @@
 					<a href="#" class="badge mx-1 badge-danger">Delete</a>
 					<a href="#" class="badge mx-1 badge-default">edit</a>
 				</div>
-		</table>
-	</main>
+		</ul>
 {% endblock %}
