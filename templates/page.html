@@ -4,20 +4,17 @@
 {% block main %}
 		<div class="row mt-2">
 			<h3 class="col-10 pl-0">Pages</h3>
-			<a class="btn btn-success col-2 mb-2" href="#">Create</a>
+			<a class="btn btn-success col-2 mb-2"
+				href="{{ url_for("page_create") }}">Create</a>
 		</div>
 		<ul class="list-group row">
-			<li class="list-group-item">
-				Exemple &ndash; Today
-				<div class="col text-right px-0">
-					<a href="#" class="badge mx-1 badge-danger">Delete</a>
-					<a href="#" class="badge mx-1 badge-default">edit</a>
-				</div>
+			{% for page in page_list %}
 			<li class=list-group-item>
-				Exemple &ndash; Today
+				{{ page.title }} &ndash; {{ page.date.strftime("%d %b %Y") }}
 				<div class="col text-right px-0">
 					<a href="#" class="badge mx-1 badge-danger">Delete</a>
 					<a href="#" class="badge mx-1 badge-default">edit</a>
 				</div>
+			{% endfor %}
 		</ul>
 {% endblock %}

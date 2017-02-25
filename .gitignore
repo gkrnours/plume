@@ -88,3 +88,6 @@ nv/
 
 # Rope project settings
 .ropeproject
+
+# Database
+plume.db
