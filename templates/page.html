@@ -13,7 +13,8 @@
 				{{ page.title }} &ndash; {{ page.date.strftime("%d %b %Y") }}
 				<div class="col text-right px-0">
 					<a href="#" class="badge mx-1 badge-danger">Delete</a>
-					<a href="#" class="badge mx-1 badge-default">edit</a>
+					<a href="{{ url_for("page_edit", page=page.id) }}"
+						class="badge mx-1 badge-default">edit</a>
 				</div>
 			{% endfor %}
 		</ul>

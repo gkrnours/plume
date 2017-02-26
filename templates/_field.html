@@ -1,0 +1,33 @@
+<div class="form-group row {% if field.errors %}has-danger{% endif %}">
+	{% if field.type in ["SelectChoicesField", "ModelSelectField"] %}
+		{{ field.label }}
+		<select class=form-control id="{{ field.id }}" name="{{ field.name }}">
+			{% for subfield in field %}{{ subfield }}{% endfor %}
+		</select>
+
+	{% elif field.type in ["TextField"] %}
+		{{ field.label }}
+		<input id="{{ field.id }}" name="{{ field.name }}" type="text"
+			{% if field.data %}value="{{ field.data }}"{% endif %}
+			class="form-control" >
+
+	{% elif field.type in ["TextAreaField"] %}
+		{{ field.label }}
+		<textarea id="{{ field.id }}" name="{{ field.name }}"
+			class="form-control" rows=7>{% if field.data -%}
+				{{ field.data }}
+		{%- endif %}</textarea>
+
+	{% else %}
+		<!-- {{ field.type }} -->
+		{{ field.label }}
+		{{ field }}
+	{% endif %}
+
+	{% for e in field.errors %}
+	<div class=form-control-feedback>{{ e }}</div>
+	{% endfor %}
+	{% if field.description %}
+	<small class="form-text text-muted">{{ field.description }}</small>
+	{% endif %}
+</div>

@@ -9,6 +9,12 @@ db_wrapper = FlaskDB()
 class Author(db_wrapper.Model):
     name = peewee.CharField(max_length=160)
 
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+
 
 class Content(db_wrapper.Model):
     HIDDEN = 'hd'
@@ -31,11 +37,11 @@ class Content(db_wrapper.Model):
 
     author = peewee.ForeignKeyField(Author, related_name="publications")
     title = peewee.CharField(max_length=160)
-    content = peewee.TextField()
     slug = peewee.CharField(max_length=40)
     date = peewee.DateTimeField(default=datetime.now)
     modified = peewee.DateTimeField(default=datetime.now)
     status = peewee.CharField(max_length=2, choices=STATUS_CHOICES)
+    content = peewee.TextField()
 
 
 if __name__ == "__main__":
