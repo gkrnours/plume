@@ -1,6 +1,8 @@
 #! /usr/bin/env python
+import os
+
 from flask import Flask
-from flask import redirect, request, url_for
+from flask import redirect, request, send_from_directory, url_for
 from playhouse.flask_utils import get_object_or_404
 from slugify import slugify
 
@@ -13,6 +15,11 @@ DATABASE = 'sqlite:///plume.db'
 app = Flask(__name__)
 app.config.from_object(__name__)
 db_wrapper.init_app(app)
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                'favicon.ico', mimetype='image/png')
 
 @app.route("/")
 @templated()
