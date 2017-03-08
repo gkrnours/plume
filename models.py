@@ -1,12 +1,11 @@
 from datetime import datetime
 
 import peewee
-from playhouse.flask_utils import FlaskDB
 
-db_wrapper = FlaskDB()
+from app import app, db
 
 
-class Author(db_wrapper.Model):
+class Author(peewee.Model):
     name = peewee.CharField(max_length=160)
 
     def __str__(self):
@@ -16,7 +15,7 @@ class Author(db_wrapper.Model):
         return self.name
 
 
-class Content(db_wrapper.Model):
+class Content(peewee.Model):
     HIDDEN = 'hd'
     DRAFT  = 'df'
     PUBLISHED = 'pb'
@@ -43,12 +42,13 @@ class Content(db_wrapper.Model):
     status = peewee.CharField(max_length=2, choices=STATUS_CHOICES)
     content = peewee.TextField()
 
-
-if __name__ == "__main__":
-    from server import app
-    db_wrapper.init_app(app)
-
-    db = db_wrapper.database
+def init_db(database=None):
+    if not database:
+        database = app.config["DATABASE"]
+    db.init(database)
     db.connect()
     db.create_tables([Author, Content])
     db.close()
+
+if __name__ == "__main__":
+    init_db()
