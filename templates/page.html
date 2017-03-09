@@ -7,6 +7,7 @@
 			<a class="btn btn-success col-2 mb-2"
 				href="{{ url_for("page_create") }}">Create</a>
 		</div>
+		{% if page_list %}
 		<ul class="list-group row">
 			{% for page in page_list %}
 			<li class=list-group-item>
@@ -18,4 +19,7 @@
 				</div>
 			{% endfor %}
 		</ul>
+		{% else %}
+		<p>There are no pages to display!</p>
+		{% endif %}
 {% endblock %}
