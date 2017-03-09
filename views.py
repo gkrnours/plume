@@ -20,14 +20,14 @@ def favicon():
 def home():
     pass
 
-@app.route("/page")
+@app.route("/page/")
 @templated()
 def page():
     ctx = {}
     ctx["page_list"] = Content.select()
     return ctx
 
-@app.route("/page/create", methods=['POST', 'GET'])
+@app.route("/page/create/", methods=['POST', 'GET'])
 @templated()
 def page_create():
     form = PageForm(request.form)
@@ -40,7 +40,7 @@ def page_create():
             return redirect(url_for("page"))
     return {"form": form}
 
-@app.route("/page/<int:page>/edit", methods=['POST', 'GET'])
+@app.route("/page/<int:page>/edit/", methods=['POST', 'GET'])
 @templated()
 def page_edit(page):
     page = get_object_or_404(Content.select(), (Content.id == page))
