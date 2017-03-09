@@ -6,6 +6,8 @@ from app import app, db
 
 
 class Author(peewee.Model):
+    class Meta:
+        database = db
     name = peewee.CharField(max_length=160)
 
     def __str__(self):
@@ -16,6 +18,8 @@ class Author(peewee.Model):
 
 
 class Content(peewee.Model):
+    class Meta:
+        database = db
     HIDDEN = 'hd'
     DRAFT  = 'df'
     PUBLISHED = 'pb'
@@ -48,6 +52,7 @@ def init_db(database=None):
     db.init(database)
     db.connect()
     db.create_tables([Author, Content])
+    Author.create(id=1, name="author")
     db.close()
 
 if __name__ == "__main__":
