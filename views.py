@@ -40,10 +40,10 @@ def page_create():
             return redirect(url_for("page"))
     return {"form": form}
 
-@app.route("/page/<int:page>/edit/", methods=['POST', 'GET'])
+@app.route("/page/<int:pk>/edit/", methods=['POST', 'GET'])
 @templated()
 def page_edit(page):
-    page = get_object_or_404(Content.select(), (Content.id == page))
+    page = get_object_or_404(Content.select(), (Content.id == pk))
     form = PageForm(request.form, obj=page)
 
     if request.method == 'POST':
