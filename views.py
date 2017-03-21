@@ -42,7 +42,7 @@ def page_create():
 
 @app.route("/page/<int:pk>/edit/", methods=['POST', 'GET'])
 @templated()
-def page_edit(page):
+def page_edit(pk):
     page = get_object_or_404(Content.select(), (Content.id == pk))
     form = PageForm(request.form, obj=page)
 
