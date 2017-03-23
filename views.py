@@ -52,3 +52,13 @@ def page_edit(pk):
             page.save()
             return redirect(url_for("page"))
     return {"form": form}
+
+@app.route("/page/<int:pk>/delete/", methods=['POST', 'GET'])
+@templated()
+def page_delete(pk):
+    page = get_object_or_404(Content.select(), (Content.id == pk))
+
+    if request.method == "POST":
+        page.delete_instance()
+        return redirect(url_for("page"))
+    return {"page": page}
