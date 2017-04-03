@@ -1,12 +1,12 @@
 import os
 
 from flask import redirect, request, send_from_directory, url_for
+from pelicansqlgenerator.models import Author, Content
 from playhouse.flask_utils import get_object_or_404
 from slugify import slugify
 
 from app import app
 from utils import templated
-from models import Author, Content
 from forms import PageForm
 
 

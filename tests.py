@@ -3,22 +3,26 @@ import unittest
 import tempfile
 
 from flask import url_for
+from playhouse import db_url
 
-from plume.app import app, db
+from plume.app import app
 
 
 class PlumeTest(unittest.TestCase):
     def setUp(self):
-        from plume import models, views
+        from pelicansqlgenerator import models
+        from plume import views
         # without importing views, app have no route
         app.config["TESTING"] = True
         app.config["SERVER_NAME"] = "localhost"
         self.client = app.test_client()
         self.db_fd, self.db_fn = tempfile.mkstemp()
-        models.init_db(self.db_fn)
+        self.db = db_url.connect("sqlite:///%s" % self.db_fn)
+        models.database.initialize(self.db)
+        models.init_db(self.db)
 
     def tearDown(self):
-        db.close()
+        self.db.close()
         os.close(self.db_fd)
         os.unlink(self.db_fn)
 
@@ -38,7 +42,7 @@ class PlumeTest(unittest.TestCase):
                 rv = self.client.get(url_for(url, pk="1"))
                 assert 404 == rv.status_code, "Error for %s" % url
             # Inserting data in db should fix the issue
-            from plume import models
+            from pelicansqlgenerator import models
             models.Content.create(id=1, title="foo", content="bar", author=1,
                     slug="foo", status="hd")
             for url in ["page_edit", "page_delete"]:
@@ -50,14 +54,14 @@ class PlumeTest(unittest.TestCase):
         assert b"no pages" in rv.data
 
     def test_save(self):
-        from plume.models import Content
+        from pelicansqlgenerator import models
         with app.app_context():
             url = url_for("page_create")
         rv = self.client.post(url, data=dict(
-            title="page test", content="# Page Title", author="1", status="pb"
+            title="page test", content="# Page Title", author="0", status="pb"
         ), follow_redirects=True)
         assert 200 == rv.status_code
-        assert 1 == Content.select().count()
+        assert 1 == models.Content.select().count()
 
 if __name__ == '__main__':
     unittest.main()

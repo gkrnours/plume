@@ -26,9 +26,13 @@ setup(
         "markdown",
         "peewee",
         "pelican",
+        "pelican-sqlgenerator",
         "python-slugify",
         "wtf-peewee",
         "wtforms",
+    ],
+    dependency_links = [
+            "https://github.com/gkrnours/pelican-sqlgenerator/tarball/master#egg=pelican-sqlgenerator-0.0.1'",
     ],
     entry_points="""
         [console_scripts]
