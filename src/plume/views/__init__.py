@@ -5,9 +5,9 @@ from pelicansqlgenerator.models import Author, Content
 from playhouse.flask_utils import get_object_or_404
 from slugify import slugify
 
-from app import app
-from utils import templated
-from forms import PageForm
+from plume.app import app
+from plume.utils import templated
+from plume.forms import PageForm
 
 
 @app.route("/favicon.ico")
