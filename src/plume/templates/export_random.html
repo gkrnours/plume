@@ -1,0 +1,31 @@
+{% set active = {"export":"active"} %}
+{% extends "base.html" %}
+
+{% block main %}
+	<div class="row my-2 mr-0">
+		<h3>Exported to Random</h3>
+	</div>
+
+	<h4>The export should be successfull.</h4>
+	<p>
+		In a perfect world, your site is available in this directory:
+	</p>
+	<pre>{{ dir }}</pre>
+
+	<h4>Pelican output</h4>
+	<p>
+		This is what pelican is saying about generating your site.</p>
+	<pre>{{ output }}</pre>
+
+	<h4>Result</h4>
+	<ul>{% for file in result %}
+		<li>{{ file }}
+	{% else %}
+		<li>Nothing
+	{% endfor %}</ul>
+
+	<form method=POST>
+		<button type=submit class="btn btn-success">Build again?</button>
+	</form>
+
+{% endblock %}

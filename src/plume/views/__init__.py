@@ -6,6 +6,7 @@ from plume.app import app
 from plume.utils import templated
 
 from .page import *
+from .export import *
 
 
 @app.route("/favicon.ico")

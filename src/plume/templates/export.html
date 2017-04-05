@@ -1,0 +1,35 @@
+{% set active = {"export":"active"} %}
+{% extends "base.html" %}
+
+{% block main %}
+	<div class="row my-2 mr-0">
+		<h3>Export</h3>
+	</div>
+
+	<h4>Deploy to random directory</h4>
+	<p>
+		This option will build your site in a random directory on this server.
+		We hope you have a way to get it.
+	</p>
+	<p class=text-muted>
+		This one show that pelican is working. Will be removed later.
+	</p>
+	<form method=POST action="{{ url_for("export_random") }}"
+		class=mb-4>
+		<button type=submit class="btn btn-success">Build</button>
+	</form>
+
+	<h4>Get a zip archive of yoursite</h4>
+	<p>
+		This option will let you download your site as a zip file.
+		Sincerly, it's our best tradeoff between we having an healthy
+			work-life balance and you having as much flexibility as you need.
+	</p>
+	<p class=text-muted>
+		By the way, it is available just yet.
+	</p>
+	<form disabled
+		class=mb-4>
+		<button type=submit class="btn btn-success" disabled>Build</button>
+	</form>
+{% endblock %}

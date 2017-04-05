@@ -1,4 +1,6 @@
 from functools import wraps
+from io import StringIO
+import sys
 
 from flask import request, render_template
 
@@ -28,3 +30,13 @@ def templated(template=None):
             return render_template(template_name, **ctx)
         return decorated_function
     return decorator
+
+class Capturing(list):
+    def __enter__(self):
+        self._stdout = sys.stdout
+        sys.stdout = self._stringio = StringIO()
+        return self
+
+    def __exit__(self, *args):
+        self.extend(self._stringio.getvalue().splitlines())
+        sys.stdout = self._stdout
